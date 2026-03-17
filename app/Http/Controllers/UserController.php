@@ -57,11 +57,18 @@ class UserController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function show(int $id): JsonResponse
+    public function show($id = null): JsonResponse
     {
         try {
+            if($id == null){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Provide User ID in param'
+                ], 500);
+            }
+                
             $user = $this->userService->getUserById($id);
-            
+
             return response()->json([
                 'success' => true,
                 'data' => $user,
@@ -123,11 +130,18 @@ class UserController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function update(UpdateUserRequest $request, int $id): JsonResponse
+    public function update(UpdateUserRequest $request, $id = null): JsonResponse
     {
         DB::beginTransaction();
         
         try {
+            if($id == null){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Provide User ID in param'
+                ], 500);
+            }
+
             $user = $this->userService->updateUser($id, $request->validated());
             
             DB::commit();
@@ -157,9 +171,16 @@ class UserController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy($id = null): JsonResponse
     {
         try {
+            if($id == null){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Provide User ID in param'
+                ], 500);
+            }
+
             $this->userService->deleteUser($id);
             
             return response()->json([
