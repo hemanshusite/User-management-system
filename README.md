@@ -12,13 +12,15 @@
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/yourusername/user-management-system.git
+git clone https://github.com/hemanshusite/User-management-system.git
 cd user-management-system
 ```
+
 ### Step 2: Install Dependencies
 ```bash
 composer install
 ```
+
 ### Step 3: Environment Setup
 ```bash
 cp .env.example .env
